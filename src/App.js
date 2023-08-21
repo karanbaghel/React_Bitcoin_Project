@@ -6,6 +6,7 @@ import Coins from "./Component/Coins";
 import Exchange from "./Component/Exchange";
 import CoinsDetails from "./Component/CoinsDetails";
 import Header from "./Component/Header";
+import Footer from "./Component/Footer";
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/exchange" element={<Exchange />} />
         <Route path="/coins/:id" element={<CoinsDetails />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }

@@ -5,11 +5,10 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement, 
+  LineElement,
   Title,
   Tooltip,
   Legend,
- 
 } from "chart.js";
 
 chartJS.register(
@@ -23,26 +22,37 @@ chartJS.register(
 );
 
 const Chart = ({ arr = [], currency, day }) => {
+  const date = [];
+  const prices = [];
 
-  const date = ["12/12/22", "23/12/23", "32/2/33"];
+  for (let i = 0; i < arr.length; i++) {
+    if (day === "24h") date.push(new Date(arr[i][0]).toLocaleTimeString());
+    else date.push(new Date(arr[i][0]).toLocaleDateString());
+    // if(days === "24h") date.push(new Date (arr[i][0]).toLocaleTimeString)
+    // date.push(new Date (arr[i][0]).toLocaleDateString)
+    prices.push(arr[i][1]); 
+  }
 
-  const prices = [1, 2, 34];
+  // console.log(date)
+  // console.log(prices)
+
+ const data ={
+  labels: date,
+  datasets: [
+    {
+      label: `Price in ${currency}`,
+      data: prices,
+      borderColor: "rgb(255,99,132)",
+      backgroundColor: "rgb(255,99,132,0.5)",
+    },
+  ],
+}
 
   return (
     <>
       <Line
         options={{ responsive: true }}
-        data={{
-          labels: date,
-          datasets: [
-            { label: `Price in ${currency}`,
-            date : prices, borderColor:"rgb(255,99,132)",
-            backgroundColor: "rgb(255,99,132,0.5)"
-          
-          }],
-         
-
-        }}
+        data={data}
       />
     </>
   );
